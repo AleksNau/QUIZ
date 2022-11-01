@@ -18,7 +18,7 @@ const getData = () => {
             {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'radio',
@@ -28,27 +28,27 @@ const getData = () => {
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный',],
                correct: 1,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             },
 
@@ -66,13 +66,13 @@ const getData = () => {
             {
                type: 'radio',
                questio: 'Вопрос',
-               answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный',],
 
             },
             {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'radio',
@@ -82,27 +82,27 @@ const getData = () => {
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный',],
                correct: 1,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             }, {
                type: 'checkbox',
                questio: 'Вопрос',
-               answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
+               answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный',],
                correct: 2,
             },
 
@@ -155,6 +155,26 @@ const hideElem = (elem) => {
    requestAnimationFrame(animation);
 }
 
+const createAnswer = data => {
+   const type = data.type;
+
+   return data.answers.map(item => {
+      const label = document.createElement('label');
+      label.className = 'answer';
+      const input = document.createElement('input');
+      input.type = type;
+      input.name = 'answer';
+      input.className = `answer__${type}`;
+
+      const text = document.createTextNode(item);
+
+      label.append(input, text);
+
+      return label;
+
+   });
+}
+
 const renderQuiz = quiz => {
    hideElem(title);
    hideElem(selection);
@@ -180,8 +200,9 @@ const renderQuiz = quiz => {
       const legend = document.createElement('legend');
       legend.className = 'main__subtitle';
       legend.textContent = data.questio;
+      const answers = createAnswer(data);
 
-      fieldset.append(legend);
+      fieldset.append(legend, ...answers);
 
       form.append(fieldset);
 
