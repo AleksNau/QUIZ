@@ -228,6 +228,7 @@ const renderQuiz = quiz => {
             console.error('не выбран ни один ответ')
          }
 
+
       })
    };
 
