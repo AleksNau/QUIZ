@@ -202,11 +202,33 @@ const renderQuiz = quiz => {
       legend.textContent = data.questio;
       const answers = createAnswer(data);
 
+      const button = createElement('button');
+      button.className = 'main__btn question__next';
+      button.type = 'submit';
+      button.textContent = 'Подтвердить'ж
+
       fieldset.append(legend, ...answers);
 
-      form.append(fieldset);
+      form.append(fieldset, button);
 
       questionBox.append(form);
+
+      form.addEventListener('submit', () => {
+         let ok = false;
+         const answer = [...form.answer].map(input => {
+            if (input.checked) ok = true;
+            return input.checked ? input.value : false;
+
+         });
+         console.log(answer);
+
+         if (ok) {
+            console.log(answer);
+         } else {
+            console.error('не выбран ни один ответ')
+         }
+
+      })
    };
 
    showQuestion();
